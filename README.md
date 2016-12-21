@@ -1,6 +1,6 @@
 # Cassandra on OpenShift CDK
 
-This is a very simple Docker build for Cassandra on rhel7, for push into the OpenShift CDK. I wanted to use rhel, and OpenShift required that containers do not run as root, hence this project. That's it!
+This is a very simple Docker build for Cassandra, intended for push into the OpenShift CDK. I wanted to use Cassandra, and OpenShift required that containers do not run as root, hence this project. That's it!
 
 ### How to use
 
