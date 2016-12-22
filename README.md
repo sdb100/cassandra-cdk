@@ -7,6 +7,9 @@ This is a very simple Docker build for Cassandra, intended for push into the Ope
 This assumes you have the CDK up and running - if not, see my **s2i-java** project for details.
 
 #### Build and install the Cassandra image
+
+_TODO there's almost certainly a simpler way of doing it than this..._
+
 Clone this repo locally, somewhere under your home dir. The CDK VM mounts your home dir by default, so once you have used _vagrant ssh_, you should be able to navigate to the cloned repo from within the image. The following assumes you have done so, and run _oc login_. 
 
 First build the cassandra-cdk image. 
@@ -33,5 +36,11 @@ docker tag cassandra-cdk  <docker pull spec>
 docker login -u admin -e <your email address> -p <logon token> <docker ip:port>
 docker push <docker pull spec>
 ```
-#### Build and run something
-Use the web console and "add something" to your project. 
+Then deploy the Cassandra image:
+```
+oc new-app cassandra-cdk
+```
+You can rsh to it using the oc command and the deployed pod name:
+```
+oc get pods
+oc rsh <pod name>
