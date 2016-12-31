@@ -7,23 +7,25 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 # allow the container to be started with `--user`
-if [ "$1" = 'cassandra' -a "$(id -u)" = '0' ]; then
-  chown -R cassandra /var/lib/cassandra /var/log/cassandra "$CASSANDRA_CONFIG"
-  exec gosu cassandra "$BASH_SOURCE" "$@"
-fi
+#if [ "$1" = 'cassandra' -a "$(id -u)" = '0' ]; then
+#  chown -R cassandra /var/lib/cassandra /var/log/cassandra "$CASSANDRA_CONFIG"
+#  exec gosu cassandra "$BASH_SOURCE" "$@"
+#fi
 
 if [ "$1" = 'cassandra' ]; then
   : ${CASSANDRA_RPC_ADDRESS='0.0.0.0'}
 
   : ${CASSANDRA_LISTEN_ADDRESS='auto'}
   if [ "$CASSANDRA_LISTEN_ADDRESS" = 'auto' ]; then
-    CASSANDRA_LISTEN_ADDRESS="$(hostname --ip-address)"
+  #  CASSANDRA_LISTEN_ADDRESS="$(hostname --ip-address)"
+    CASSANDRA_LISTEN_ADDRESS="127.0.0.1"
   fi
 
   : ${CASSANDRA_BROADCAST_ADDRESS="$CASSANDRA_LISTEN_ADDRESS"}
 
   if [ "$CASSANDRA_BROADCAST_ADDRESS" = 'auto' ]; then
-    CASSANDRA_BROADCAST_ADDRESS="$(hostname --ip-address)"
+#    CASSANDRA_BROADCAST_ADDRESS="$(hostname --ip-address)"
+    CASSANDRA_BROADCAST_ADDRESS="127.0.0.1"
   fi
   : ${CASSANDRA_BROADCAST_RPC_ADDRESS:=$CASSANDRA_BROADCAST_ADDRESS}
 
